@@ -201,7 +201,7 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
 .slist li:last-child{border-bottom:1px solid var(--line)}
 .slist .go{display:inline-block;margin-top:5px}
 .sub{margin:32px 0 6px;font:480 19px/1.25 var(--serif)}
-.done li{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:7px 0;color:var(--bone-3);font-size:15px;text-decoration:line-through;text-decoration-color:var(--line-2)}
+.done li{display:grid;grid-template-columns:22px 1fr;gap:8px;padding:7px 0;color:var(--bone-2);font-size:15px}
 .done svg{width:16px;height:16px;margin-top:3px;color:var(--old)}
 
 /* Next steps */
@@ -287,6 +287,17 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
 .sl .d{flex:0 0 auto;width:9px;height:9px;border-radius:50%;background:var(--c)}
 .sl .old{--c:var(--old)}.sl .new{--c:var(--new)}.sl .drop{--c:var(--drop)}
 
+/* Where each box stands */
+.bx-num{margin-right:7px;color:var(--bone-3);font-weight:600;font-variant-numeric:tabular-nums}
+.bx.notyet .bx-text{margin-left:2px;padding:9px 12px 10px;border:1px dashed var(--line-2);border-radius:12px}
+.bx.notyet .bx-node{margin-top:16px}
+.bx.notyet .bx-row .chev{margin-top:12px}
+.fn-n{display:block;margin-bottom:2px;color:var(--bone-3);font:600 10.5px/1.2 var(--sans);font-variant-numeric:tabular-nums}
+.fn.notyet{border-style:dashed;border-color:rgba(238,232,220,.45)}
+.t-in{--tc:var(--bone)}
+.t-file::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--bone-2)}
+.stl{margin:0;color:var(--bone);font-size:14px;line-height:1.5}
+
 @media (min-width:600px){
   body{font-size:16px}
   .panel{padding-top:36px}
@@ -302,7 +313,7 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
 <header class="top">
   <div class="top-in">
     <span class="bar-title">New SOP skeleton</span>
-    <span class="bar-meta">Draft, 6 Nov 2026</span>
+    <span class="bar-meta">Updated 8 Nov 2026</span>
   </div>
 </header>
 <nav class="bar" id="bar">
@@ -311,9 +322,8 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
       <span class="tab-ind" aria-hidden="true"></span>
       <button role="tab" class="wide" id="t-flow" data-tab="flow" aria-controls="p-flow" aria-selected="true">Skeleton - Flow Chart</button>
       <button role="tab" class="wide" id="t-skeleton" data-tab="skeleton" aria-controls="p-skeleton" aria-selected="false" tabindex="-1">Skeleton</button>
-      <button role="tab" id="t-changes" data-tab="changes" aria-controls="p-changes" aria-selected="false" tabindex="-1">Changes</button>
-      <button role="tab" id="t-questions" data-tab="questions" aria-controls="p-questions" aria-selected="false" tabindex="-1">Questions<span class="badge" id="qbadge">6</span></button>
-      <button role="tab" id="t-next" data-tab="next" aria-controls="p-next" aria-selected="false" tabindex="-1">Next steps</button>
+      <button role="tab" class="wide" id="t-questions" data-tab="questions" aria-controls="p-questions" aria-selected="false" tabindex="-1">Questions<span class="badge" id="qbadge">2</span></button>
+      <button role="tab" class="wide" id="t-next" data-tab="next" aria-controls="p-next" aria-selected="false" tabindex="-1">Next steps</button>
     </div>
   </div>
 </nav>
@@ -321,29 +331,28 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
 <main>
   <section class="panel" id="p-flow" role="tabpanel" aria-labelledby="t-flow">
     <h1>The new SOP at a glance</h1>
-    <p class="lead">Laid out like CT’s chart, with your boxes merged in. Swipe sideways along the branches, and tap any box to see what goes in it.</p>
+    <p class="lead">Your chart, numbered the same way as your draft. Swipe sideways along the branches, and tap any box to see what goes in it and where it stands.</p>
     <p class="status"><span class="placed"></span> <button class="linkbtn qlink" type="button" data-go="tab:questions"></button></p>
     <ul class="legend" aria-label="Key">
       <li><i class="lg old" aria-hidden="true"></i>From the old SOP</li>
       <li><i class="lg new" aria-hidden="true"></i>New</li>
-      <li><i class="lg drop" aria-hidden="true"></i>Dropped</li>
       <li><i class="lg input" aria-hidden="true"></i>Needs input</li>
-      <li><i class="lg add" aria-hidden="true"></i>Added</li>
+      <li><i class="lg add" aria-hidden="true"></i>Not in your draft yet</li>
     </ul>
     <div class="fit-row"><button class="linkbtn" id="fitbtn" type="button">See the whole chart</button></div>
     <div class="frings" id="frings" role="group" aria-label="Jump to a branch"></div>
     <div class="flow-scroll" id="flow-scroll">
       <div class="flow" id="fchart">
-        <div class="f-root-row"><div class="f-root"><span class="f-root-t">RWM Bancassurance SOP</span><span class="f-root-s">RP and SP products, and Universal Life</span></div></div>
+        <div class="f-root-row"><div class="f-root"><span class="f-root-t">RWM Bancassurance SOP</span><span class="f-root-s">Conventional RP and SP, and Universal Life</span></div></div>
         <div class="cols" id="cols"></div>
       </div>
     </div>
-    <p class="note">Front pages and Reporting have dashed outlines because they’re added. Box names follow CT’s chart.</p>
+    <p class="note">A dashed outline means the box isn’t in your draft yet. Box names and numbers follow your chart.</p>
   </section>
 
   <section class="panel" id="p-skeleton" role="tabpanel" aria-labelledby="t-skeleton" hidden>
     <h1>The new SOP, box by box</h1>
-    <p class="lead">CT’s chart is the base. Your boxes are slotted in, with the changes from the campaign meeting. Tap a branch to open it, then a box to see what goes in.</p>
+    <p class="lead">The same boxes and numbers as your chart and your draft. Tap a branch to open it, then a box to see which old SOP sections go into it and where it stands.</p>
     <p class="status"><span class="placed"></span> <button class="linkbtn qlink" type="button" data-go="tab:questions"></button></p>
 
     <div class="ctrl">
@@ -357,49 +366,41 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
         <span class="root-ring" aria-hidden="true"></span>
         <div>
           <div class="root-name">RWM Bancassurance SOP</div>
-          <div class="root-sub">RP and SP products, and Universal Life</div>
+          <div class="root-sub">Conventional RP and SP, and Universal Life</div>
         </div>
       </div>
       <ol class="branches" id="branches"></ol>
     </div>
 
-    <p class="note">Credit-related, PFS and general insurance parts stay in the old SOP for the other teams. Whether takaful comes across is <button class="linkbtn" data-go="q:3">question 3</button>.</p>
-    <p class="foot">Draft for discussion, 6 November 2026. Box names follow CT’s chart. A dashed outline marks anything added that isn’t on it.</p>
+    <p class="note">Credit-related, PFS, general insurance and takaful parts stay in the old SOP for the other teams. This SOP is conventional only.</p>
+    <p class="foot">Updated 8 November 2026. Box names and numbers follow your chart. A dashed outline means the box isn’t in your draft yet.</p>
   </section>
 
-  <section class="panel" id="p-changes" role="tabpanel" aria-labelledby="t-changes" hidden>
-    <h2>What’s different from CT’s chart</h2>
-    <p class="lead">Box names stay as CT wrote them. These are the changes on top.</p>
-    <ol class="clist" id="clist"></ol>
-
-    <h2 class="sp" id="where-h"></h2>
-    <p class="lead">Grouped the way your draft has them. Tap one to see it in the skeleton.</p>
-    <div id="her"></div>
-  </section>
 
   <section class="panel" id="p-questions" role="tabpanel" aria-labelledby="t-questions" hidden>
-    <h2>Answer these first</h2>
-    <p class="lead">Each one changes the skeleton. The rest can follow.</p>
+    <h2>Still open</h2>
+    <p class="lead">These decide what stays in. The rest can follow.</p>
     <ol class="qlist" id="qlist"></ol>
 
-    <h2 class="sp">Smaller ones from the old SOP review</h2>
-    <p class="lead">These don’t change the skeleton, but each box needs its answer before it’s written.</p>
+    <h2 class="sp">Smaller ones, box by box</h2>
+    <p class="lead">Each needs its answer before that box is final.</p>
     <ul class="slist" id="slist"></ul>
 
-    <h3 class="sub">No longer needed</h3>
-    <p class="lead">Credit products are out, so these drop away.</p>
+    <h3 class="sub">Settled</h3>
+    <p class="lead">Answered since the skeleton was first drafted.</p>
     <ul class="done" id="done"></ul>
   </section>
 
   <section class="panel" id="p-next" role="tabpanel" aria-labelledby="t-next" hidden>
     <h2>What happens next</h2>
+    <p class="lead">Your checklist keeps track of what’s done as you tick it off.</p>
     <ol class="seq" id="steps"></ol>
 
     <h2 class="sp">To collect from colleagues</h2>
     <p class="lead">Only you can get these.</p>
     <ul class="todo" id="collect"></ul>
 
-    <h2 class="sp">To draft once the skeleton is agreed</h2>
+    <h2 class="sp">Still to do before the reviews</h2>
     <ul class="todo" id="draft"></ul>
 
     <h2 class="sp">Reviews</h2>
@@ -419,147 +420,129 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
 'use strict';
 
 var SRC = {old:'From the old SOP', 'new':'New', drop:'Dropped'};
+var ST = {w:'In your draft', wd:'In your draft', d:'In the draft sections file', c:'Needs the old clause', r:'Only if the reviewers ask', i:''};
+var STL = {
+ w:'In your draft.',
+ wd:'In your draft. The rest is in the draft sections file, ready to paste in.',
+ d:'Drafted in the draft sections file, ready to paste in.',
+ c:'Not written yet. It needs the old clawback clause from the shared folder.',
+ r:'Not written. Only needed if the reviewers ask for one.',
+ i:'Not written yet. It needs input from colleagues.'
+};
 
 var BR = [
- {id:'f', num:'', name:'Front pages', added:true, sub:'7 parts, not on CT’s chart',
-  line:'What every SOP opens with. CT’s chart leaves these out because it’s a view for management.',
+ {id:'b1', num:1, name:'Introduction',
+  line:'What the SOP covers, who follows it, and the rules and SOPs it sits under.',
   boxes:[
-   {id:'f1', t:'Purpose and scope', src:'old', line:'What the SOP covers and who has to follow it.', old:[['1.1','Purpose'],['1.2','Applicability']]},
-   {id:'f2', t:'Document information', src:'old', line:'Owner, version and review dates.', old:[['1.3','Document information']]},
-   {id:'f3', t:'About bancassurance at HLB', src:'old', line:'Our partners, the channels we sell through, and the RP and SP products.', old:[['2.2.1','Bancassurance and our partners'],['2.10.4','Distribution channels'],['2.3','Product types']], notes:['Only the RP and SP rows of the product table come across.']},
-   {id:'f4', t:'Laws and regulations', src:'old', line:'The list of rules we follow, refreshed for RP, SP and UL.', old:[['2.1.1','Laws and regulations']], notes:['The old list is dated May 2025, so each item needs checking against the current version.']},
-   {id:'f5', t:'Other SOPs this one points to', src:'old', line:'Every SOP the new one refers to, with its exact title.', old:[['2.1.2','Internal policies and SOPs']], notes:['New ones to add include the EAR SOP and the Product Management and Marketing SOP.']},
-   {id:'f6', t:'General rules', src:'old', line:'Staff purchases, records, user access, breach and fraud reporting, and our risk and control self-assessment.', old:[['2.10.1','Staff purchases'],['2.10.2','Filing and records'],['2.10.5','User access'],['2.6','Breach reporting'],['2.4','Fraud reporting'],['2.7, 2.8','Risk and control self-assessment']]},
-   {id:'f7', t:'Glossary', src:'old', line:'Done last, once the wording settles.', old:[['1.4','Abbreviations and glossary']]}
+   {id:'1.1', t:'Purpose', src:'old', st:'w', line:'What the SOP covers: conventional RP and SP, and the UL referral program.', old:[['1.1','Purpose']], notes:['Say exactly what it covers. “All processes” of RWM Bancassurance is more than this SOP holds.']},
+   {id:'1.2', t:'Applicability', src:'old', st:'w', line:'Who has to follow it.', old:[['1.2','Applicability']], notes:['It could also name HLA as our partner and the channels we sell through (old 2.2.1 and 2.10.4).']},
+   {id:'1.3', t:'Document Information', src:'old', st:'w', line:'Owner, contact mailbox, dates and version.', old:[['1.3','Document information']], notes:['Fill in Date First Issued and the footer placeholders once the SOP reference is given.']},
+   {id:'1.4', t:'Laws & Regulations', src:'old', st:'w', line:'The BNM, PIDM and LIAM rules this SOP follows.', old:[['2.1.1','Laws and regulations']], notes:['Put BNM’s Policy Document on Bancassurance/Bancatakaful back in. It’s the one written for this channel.','Item 6 (AML Sectoral Guidelines 2) was merged into item 16, so it can go.','Add the PDPA, the Capital Markets and Services Order 2021 and the SC’s sophisticated investor guidelines.']},
+   {id:'1.5', t:'Related Policies & SOPs', src:'old', st:'w', line:'Every other SOP and policy this one points to.', old:[['2.1.2','Internal policies and SOPs']], notes:['Add the Record Archiving SOP, the EAR SOP, and the Board Policies on Products and Value Propositions and on Product Risk Approval.']},
+   {id:'1.6', t:'Glossary', src:'old', st:'w', line:'Short forms, finished last once the wording settles.', old:[['1.4','Abbreviations and glossary']], notes:['Your draft has the glossary at 1.4. Moving it to the end matches the chart.','The draft sections file ends with the short forms still to add.']}
   ]},
- {id:'b1', num:1, name:'Know Your Customer (KYC): Pre & Post Sales',
-  line:'The checks around the sale.',
+ {id:'b2', num:2, name:'Know Your Customer (KYC): Pre & Post Sales',
+  line:'The checks and steps around the sale.',
   boxes:[
-   {id:'1.1', t:'Pre-Sales Screening & Due Diligence', src:'old', line:'Who can apply, and the due diligence before a sale.', old:[['2.2.5','Customer due diligence'],['4.1.1','Eligible applicant']]},
-   {id:'1.2', t:'Advisory & Suitability (Customer Fact Finding, CFF)', src:'old', line:'Fact-finding, suitability, vulnerable customers and ILP risk, plus the signed Confirmation of Advice we keep.', old:[['2.2.6','Vulnerable consumers'],['5.1 (4)','Confirmation of Advice']], notes:['Confirmation of Advice moves here from Claims. The insurers send the signed forms every week, and we keep them for the life of the policy in case of disputes.','Risk for ILP is new. The old SOP has nothing specific on it.','Still open: who reviews the insurers’ follow-up calls to vulnerable customers.']},
-   {id:'1.3', t:'Post-Sales Verification (Welcome Call)', src:'old', input:true, line:'The welcome call, and following up customers who gave negative feedback or didn’t answer.', old:[['4.10.1','Welcome call']], notes:['Needs the updated welcome call process.']},
-   {id:'1.4', t:'Selling Steps', src:'old', added:true, q:[2], line:'Points to the RWM Sales Supervisory SOP for the step-by-step sale.', old:[['3.5.1','Application and submission, HLA'],['3.5.2','Application and submission, HLMT'],['4.1.2','Presence of applicant'],['4.1.3','Application rules'],['4.2.1, 4.2.3','Sending proposals to the insurers']], notes:['If “sales process” means the full selling steps, this grows into a full box.','Still open: does the RWM Sales Supervisory SOP really cover these steps?']}
+   {id:'2.1', t:'Pre-Sales Screening & Due Diligence', src:'old', st:'w', line:'Face-to-face ID checks, name screening and due diligence before the sale.', old:[['2.2.5','Customer due diligence'],['4.1.1','Eligible applicant']], notes:['Say what happens when a customer is a PEP or rated high risk.']},
+   {id:'2.2', t:'Advisory & Suitability (Customer Fact Find, CFF)', src:'old', st:'w', line:'Fact-finding, suitability, the care assessment for vulnerable customers, and the duty of disclosure.', old:[['2.2.6','Vulnerable consumers']], notes:['The draft says high-risk means income below RM2,000. BNM’s bancassurance policy document gives up to RM5,000 a month, so check with Compliance.','BNM’s draft on proper advice (30 Sep 2026) would replace the three CFF choices once it’s final.']},
+   {id:'2.3', t:'Sales Process', src:'old', st:'w', line:'The full selling steps: product types, what to explain, the sales illustration, payment and submission to HLA.', old:[['2.3','Product types, the RP and SP rows'],['3.5.1','Application and submission, HLA'],['4.1.2, 4.1.3','Applicant and application rules'],['4.2.1','Sending proposals to HLA']], notes:['Add what applies to Single Premium payments.','Your 2.3.1 (revising the SI and PDS) moves to 7.2.1.']},
+   {id:'2.4', t:'Post-Sales Verification (Welcome Call)', src:'old', st:'w', line:'HLA’s welcome call, the feedback categories, and following up negative feedback.', old:[['4.10.1','Welcome call']], notes:['Your 2.4 b) (post-sales servicing) moves to 6.2.']}
   ]},
- {id:'b2', num:2, name:'Distribution Team: Sales Qualification & Balanced Scorecard',
+ {id:'b3', num:3, name:'Distribution Team: Sales Qualification & Balanced Scorecard',
   line:'Who can sell, and how they’re measured.',
   boxes:[
-   {id:'2.1', t:'Licensing & Qualifications', src:'old', line:'Licences by role, plus our hand-offs to L&D and the insurers.', old:[['2.2.8','Staff licensing'],['2.10.3','Corporate agency rules']], notes:['The licence tables and CPD hours point to the Licensing and Certification SOP.']},
-   {id:'2.2', t:'Training Requirements', src:'old', line:'Yearly CPD training with the insurers and L&D, and product briefings at launch.', old:[['2.2.8','CPD and RFP training'],['2.2.3 (8)','Briefing to frontliners']]},
-   {id:'2.3', t:'Balanced Scorecard (BSC)', src:'new', input:true, line:'How sales staff are scored.', notes:['Nothing in the old SOP. Needs input on how the scorecard works.']}
+   {id:'3.1', t:'Licensing & Qualifications', src:'old', st:'w', line:'Licences by role, and the CPD and RFP requirements.', old:[['2.2.8','Staff licensing'],['2.10.3','Corporate agency rules']], notes:['The corporate agent rules from old 2.10.3 aren’t in yet.']},
+   {id:'3.2', t:'Training Requirements', src:'old', st:'w', line:'Yearly CPD training with HLA and L&D, and e-RFP enrolment.', old:[['2.2.8','CPD and RFP training'],['2.2.3 (8)','Briefing to frontliners']], notes:['Forwarding HLA’s monthly agent list to L&D isn’t in yet.']},
+   {id:'3.3', t:'Balanced Scorecard (BSC)', src:'new', input:true, st:'i', line:'How sales staff are scored.', notes:['Nothing in the old SOP. Needs input on how the scorecard works.']}
   ]},
- {id:'b3', num:3, name:'Incentive & Rewards Management',
+ {id:'b4', num:4, name:'Incentive & Rewards Management',
   line:'Recognition, payouts and the holdback.',
   boxes:[
-   {id:'3.1', t:'Recognition Programs', src:'new', input:true, line:'How top sales staff are recognised.', notes:['Nothing in the old SOP. Needs input on how the programs run.']},
-   {id:'3.2', t:'Incentive Payouts', src:'new', input:true, line:'How and when incentives are paid.', notes:['Nothing in the old SOP. Needs input on how payouts work.','A definition of incentive may belong here. It came up in the second meeting, but the recording wasn’t clear.']},
-   {id:'3.3', t:'Incentive Clawback Mechanism', src:'old', line:'The yearly incentive holdback, cut when first or second year persistency falls short.', old:[['5.1 (6)','Persistency report and holdback table']], notes:['Fix: exactly 90% in year 1, or 80% in year 2, falls in no band, and a strong year 1 with a weak year 2 isn’t covered.','Not the same as the campaign clawback in branch 4.']}
+   {id:'4.1', t:'Recognition Programs', src:'new', input:true, st:'i', line:'How top sales staff are recognised.', notes:['Nothing in the old SOP. Needs input on how the programs run.']},
+   {id:'4.2', t:'Incentive Payouts & Rewards', src:'new', input:true, st:'i', line:'How and when incentives are paid.', notes:['Nothing in the old SOP. Needs input on how payouts work.','A definition of incentive may belong here. It came up in the second meeting, but the recording wasn’t clear.']},
+   {id:'4.3', t:'Incentive Clawback Mechanism', src:'old', st:'d', line:'Persistency reports, and the yearly incentive holdback when first or second year persistency falls short.', old:[['5.1 (6)','Persistency report and holdback table']], notes:['The draft fixes the gap where exactly 90% or 80% fell in no band.','Still to confirm: which row applies when Y1 and Y2 land in different rows.','Not the same as the campaign clawback in 5.2.2.']}
   ]},
- {id:'b4', num:4, name:'Campaign Management (Customer & Sales Team)',
-  line:'Our part of a campaign. Most of the steps already sit in the Product Management and Marketing SOP on e-SOP, so this branch points there.',
+ {id:'b5', num:5, name:'Campaign Management (Customer & Sales Team)',
+  line:'Our part of a campaign, from the proposal to the rewards.',
   boxes:[
-   {id:'4.1', grp:'Pre-campaign', t:'EAR Approval', src:'old', changed:true, input:true, line:'We propose, agreed with the segment and distribution channel heads. Costs go through the EAR SOP, and no-cost campaigns go by memo to the same people plus Finance.', old:[['2.2.11 (3)','Marketing campaigns'],['2.9','Campaign setup and approval']], notes:['Reviewers: Risk Management, Compliance, and HR when staff are rewarded, because of tax.','Approvers and limits stay in the EAR SOP, so they aren’t repeated here.','Waiting on the campaign team’s input.']},
-   {id:'4.2', grp:'Pre-campaign', t:'Campaign Materials & T&C', src:'old', changed:true, q:[3], line:'One standard set of T&Cs, the campaign fact sheet Compliance asks for, the rules for marketing materials, and FD promo codes.', old:[['2.2.7','Marketing and promotional materials'],['2.2.9','FD promo codes'],['2.2.10','FD-i promo codes'],['4.5.2','Disclosure clause in campaign T&Cs']], notes:['Compliance wants the fact sheet before it approves.','FD-i promo codes only come across if takaful is in.']},
-   {id:'4.3', grp:'Pre-campaign', t:'Campaign Communication', src:'old', changed:true, line:'A roll-out email to frontliners on launch day, and quick corrections by email. Wrong or missing communication becomes an audit finding.', old:[['2.2.11 (3)','Telling sales staff before launch'],['2.2.11 (1, 2, 4)','Press, ads and website']], notes:['Press releases, ads and website updates point to the marketing SOPs.']},
-   {id:'4.4', grp:'Post-campaign', t:'Tracking & Fulfillment', src:'old', changed:true, input:true, line:'Tracking from the partners’ reports plus our own tracker. One person prepares the winner list and another checks it, then the segment head and RWM Business Compliance clear it before rewards go out.', old:[['2.9','Campaign fulfilment']], notes:['Customer campaign fulfilment is with Marcom now. Who fulfils staff campaigns is still to confirm.','The winner list check isn’t written down anywhere yet, so this is its first home.']},
-   {id:'4.5', grp:'Post-campaign', t:'Campaign Clawback', src:'old', added:true, line:'The campaign clawback clause, kept from the old version as agreed.', old:[['','The existing clawback clause']], notes:['Not the same as the incentive holdback in branch 3.']},
-   {id:'4.6', grp:'Post-campaign', t:'Post-Implementation Review (PIR)', src:'drop', line:'Dropped. No one has done one, so it comes back only if the reviewers ask.', notes:['Agreed in the campaign meeting.']}
+   {id:'5.1.1', grp:'5.1 Pre-Campaign', t:'EAR Approval', src:'old', input:true, st:'d', line:'We propose, agreed with the segment and distribution channel heads. Costs go through the EAR SOP, and no-cost campaigns go by memo to the same people plus Finance.', old:[['2.2.11 (3)','Marketing campaigns'],['2.9','Campaign setup and approval']], notes:['Reviewers: Risk Management, Compliance, and HR when staff are rewarded, because of tax.','Drafted from the campaign meeting, so the campaign team only needs to confirm it.']},
+   {id:'5.1.2', grp:'5.1 Pre-Campaign', t:'Campaign Materials & T&C', src:'old', st:'d', line:'The standard T&C, the campaign fact sheet, the rules for marketing materials and the PIDM statements, and FD promo codes.', old:[['2.2.7','Marketing and promotional materials'],['2.2.9','FD promo codes'],['4.5.2','Disclosure clause in campaign T&Cs']], notes:['Check the PIDM statements against PIDM’s current wording.']},
+   {id:'5.1.3', grp:'5.1 Pre-Campaign', t:'Campaign Communication', src:'old', st:'d', line:'The launch email to frontliners with the fact sheet, and quick corrections by email.', old:[['2.2.11 (3)','Telling sales staff before launch'],['2.2.11 (1, 2, 4)','Press, ads and website']], notes:['Press releases, ads and website updates point to the marketing SOPs.']},
+   {id:'5.2.1', grp:'5.2 Post-Campaign', t:'Tracking & Fulfillment', src:'old', input:true, st:'d', line:'Tracking from HLA’s reports. A maker and a checker check the winners list, the segment head and RWM Compliance clear it, then the gifts go out.', old:[['2.9','Campaign fulfilment']], notes:['Still to confirm: who fulfils staff campaigns, now that the marketing team does customer ones.']},
+   {id:'5.2.2', grp:'5.2 Post-Campaign', t:'Campaign Clawback', src:'old', st:'c', line:'The campaign clawback clause, kept from the old version as agreed.', old:[['Shared folder','The existing clawback clause']], notes:['Not the same as the incentive holdback in 4.3.']},
+   {id:'5.2.3', grp:'5.2 Post-Campaign', t:'Post-Implementation Review (PIR)', src:'new', st:'r', line:'On the chart, but written only if the reviewers ask for one.', notes:['No one has done one for a campaign so far. Agreed in the campaign meeting.']}
   ]},
- {id:'b5', num:5, name:'Customer Engagement & Servicing',
+ {id:'b6', num:6, name:'Customer Engagement & Servicing',
   line:'Looking after customers after the sale.',
   boxes:[
-   {id:'5.1', t:'Customer Communication', src:'old', line:'Notices when T&Cs change, at least 21 days ahead, and how customer information is handled.', old:[['2.2.11','Product documentation review'],['4.5.1','Confidentiality'],['4.5.2','Disclosure of customer information'],['4.5.4','Review of customer information']]},
-   {id:'5.2', t:'Product Servicing', src:'old', line:'Servicing and claims point to the insurers. Ours: delivery times, the insurers’ turnaround times, renewal listings and unmatched premiums.', old:[['4.10.2','Post-sales servicing'],['4.10.3','Claims'],['4.9.2','Delivery'],['4.7.1, 4.7.2','Insurers’ turnaround times'],['5.1 (5)','Renewal listing'],['4.3.2','Unmatched payments']], notes:['Fix: 4.7 gives couriers 3 to 4 working days, but 4.9.2 says delivery takes 7 to 14.']},
-   {id:'5.3', t:'Sales Complaint Management', src:'old', line:'Product and claims complaints go to the insurer. Complaints about how something was sold are ours, under the Complaint Management SOP.', old:[['2.5','Complaint escalation'],['2.2.11 (5)','Records for investigations']], notes:['Run this one past RWM Compliance.']}
+   {id:'6.1', t:'Customer Communication', src:'old', st:'d', line:'Notices when T&Cs change, at least 21 days ahead, and how customer information is kept private.', old:[['2.2.11','Product documentation review'],['4.5.1','Confidentiality'],['4.5.2','Disclosure of customer information'],['4.5.4','Review of customer information']], notes:['Still to confirm: is the 21-day notice ours or HLA’s?']},
+   {id:'6.2', t:'Product Servicing', src:'old', st:'d', line:'Service requests and claims go to HLA. Ours: delivery, HLA’s turnaround times, renewal listings and unmatched payments.', old:[['4.10.2','Post-sales servicing'],['4.10.3','Claims'],['4.9.1, 4.9.2','Policy changes and delivery'],['4.7.1, 4.7.2','HLA’s turnaround times'],['4.5.3','Customer enquiries'],['5.1 (5)','Renewal listing'],['4.3.2','Unmatched payments']], notes:['Fix: 4.7 gives couriers 3 to 4 working days, but 4.9.2 says delivery takes 7 to 14.','Still to confirm: who decides on unmatched payments, and whether UL servicing goes through the Offshore IB.']},
+   {id:'6.3', t:'Sales Complaint Management', src:'old', st:'d', line:'Product and claims complaints go to HLA. Complaints about how something was sold are ours, under the CMSOP.', old:[['2.5','Complaint escalation'],['2.2.11 (5)','Records for investigations']], notes:['Run this one past RWM Compliance.']}
   ]},
- {id:'b6', num:6, name:'Product Management (Regular Premium & Single Premium)',
+ {id:'b7', num:7, name:'Product Management (Regular Premium & Single Premium)',
   line:'A product’s life, from idea to review.',
   boxes:[
-   {id:'6.1', t:'Pre-Launch (New Products)', src:'old', line:'Development, PRAC approval, BNM, sign-offs and the frontliner briefing.', old:[['2.2.3','New product development and launch']]},
-   {id:'6.2', t:'Existing Product Maintenance & Change Management', src:'old', q:[3], line:'Changes to features and T&Cs, document reviews, and revised illustrations and PDS.', old:[['2.2.4','Change management'],['2.2.11','Product documentation review'],['3.9.1','Revised illustrations, HLA'],['3.9.2','Revised illustrations, HLMT']], notes:['HLMT’s illustrations only come across if takaful is in.']},
-   {id:'6.3', t:'Post-Sales & Post-Launch Review', src:'old', line:'A review about a year after launch, and the shelf review every two years.', old:[['2.2.3 (9)','Post launch'],['2.2.11 (7)','Product review']]}
+   {id:'7.1', t:'Pre-Launch (New Products)', src:'old', st:'w', line:'Development, PRAC approval, BNM, sign-offs and the frontliner briefing.', old:[['2.2.3','New product development and launch']], notes:['Step 3 b) goes in a circle, and PRAC is “Committee” in the glossary but “Sub-Committee” here.','Step 5’s “session 3.2” becomes “section 7.2.1”.']},
+   {id:'7.2', t:'Existing Product Maintenance & Change Management', src:'old', st:'wd', line:'Changes to features and T&Cs, the yearly document review, and revised illustrations and PDS.', old:[['2.2.4','Change management'],['2.2.11','Product documentation review'],['3.9.1','Revised illustrations and PDS']], notes:['Your 2.3.1 moves here as 7.2.1.']},
+   {id:'7.3', t:'Post-Sales & Post-Launch Review', src:'old', st:'w', line:'A review about a year after launch, and the shelf review every two years.', old:[['2.2.3 (9)','Post launch'],['2.2.11 (7)','Product review']]}
   ]},
- {id:'b7', num:7, name:'Universal Life (UL) & Broker Referral Program',
+ {id:'b8', num:8, name:'Universal Life (UL) & Broker Referral Program',
   line:'The brokers we refer customers to, and how the referral program runs.',
   boxes:[
-   {id:'7.1', grp:'Partnership management', t:'Onboarding', src:'new', line:'Bringing a new broker onto the panel.', notes:['Nothing in the old SOP for brokers. The broker onboarding going through PRAC now is a live example to write from.']},
-   {id:'7.2', grp:'Partnership management', t:'Maintenance', src:'old', line:'Yearly due diligence and name screening on each broker.', old:[['3.10.2','Annual due diligence on UL brokers']]},
-   {id:'7.3', grp:'Partnership management', t:'Off-boarding', src:'new', input:true, line:'Ending a broker relationship.', notes:['Nothing in the old SOP. Needs input on how it’s done.']},
-   {id:'7.4', t:'Referral Program Governance', src:'old', input:true, line:'Consent forms, the referral register, referral income, and UL’s regulatory requirements.', old:[['3.10.1','Referral program']], notes:['Needs UL’s regulatory requirements.']}
+   {id:'8.1.1', grp:'8.1 Partnership Management', t:'Onboarding', src:'new', st:'d', line:'Bringing a new broker onto the panel, through PRAC.', notes:['Drafted from the broker onboarding going through PRAC now. Check it’s the standard route.']},
+   {id:'8.1.2', grp:'8.1 Partnership Management', t:'Maintenance', src:'old', st:'d', line:'Yearly due diligence and name screening on each broker.', old:[['3.10.2','Annual due diligence on UL brokers']]},
+   {id:'8.1.3', grp:'8.1 Partnership Management', t:'Off-boarding', src:'new', input:true, st:'i', line:'Ending a broker relationship.', notes:['Nothing in the old SOP. Needs input on how it’s done.']},
+   {id:'8.2', t:'Referral Program Governance', src:'old', input:true, st:'w', line:'Who can be referred, consent, appointments, premium financing and referral income.', old:[['3.10.1','Referral program']], notes:['Still needs UL’s regulatory requirements.','Step 1 says Sophisticated Investors and step 5 says Accredited Investor. Use one term.']}
   ]},
- {id:'b8', num:8, name:'Reporting', added:true, sub:'2 boxes, proposed',
-  line:'Proposed. The old SOP’s Section 5 is ours, but neither chart has a place for it.',
+ {id:'b9', num:9, name:'Reporting',
+  line:'Monthly numbers, forecasts, the MC report and commission posting.',
   boxes:[
-   {id:'8.1', t:'Sales & Management Reporting', src:'old', added:true, q:[4,5], line:'Monthly sales and revenue numbers by the 7th, forecasts twice a month, and the MC report.', old:[['5.1 (1 to 3)','Reporting']], notes:['RWM-Admin does part of this. Whether their steps stay depends on question 4.']},
-   {id:'8.2', t:'Commission Posting', src:'old', added:true, q:[4,5], line:'Commission and fees from the insurers, posted, approved and checked against what they paid.', old:[['5.2.1','Commission posting']], notes:['Fix: PtoP and TSR are never spelled out.','RWM-Admin does part of this too.']}
+   {id:'9.1', t:'Sales & Management Reporting', src:'old', st:'d', q:[1], line:'Monthly sales and revenue numbers by the 7th, forecasts twice a month, the MC report, and HLA’s weekly Confirmation of Advice.', old:[['5.1 (1 to 3)','Reporting'],['5.1 (4)','Confirmation of Advice']], notes:['RWM-Admin does part of this. Whether their steps stay depends on question 1.','The Confirmation of Advice could sit in 2.2 instead.']},
+   {id:'9.2', t:'Commission Posting', src:'old', st:'d', q:[1], line:'Commission and fees from HLA, posted, approved and checked against what HLA paid, plus UL referral income.', old:[['5.2.1','Commission posting']], notes:['Still to confirm: what PtoP stands for.','RWM-Admin does part of this too.']}
   ]}
 ];
 
-var HER = [
- {g:'Regulatory Compliance', items:[['Vulnerable Customer','1.2'],['Customer Suitability','1.2'],['Risk for ILP','1.2'],['Sales','1.4'],['Sales Process','1.4'],['Licensing','2.1']]},
- {g:'Incentives', items:[['Campaign recognition','3.1'],['Stakeholders','4.1'],['Sales campaign','4.1']]},
- {g:'Customer Engagement', items:[['Campaign','4.1'],['Communication','5.1']]},
- {g:'RP & SP', items:[['New Product Development & Launch','6.1'],['Change Management for Product Variation','6.2'],['Application & Submission','1.4'],['Eligible Applicant','1.1'],['Revision of SI & PDS','6.2'],['Post Sales Servicing','5.2'],['Banca Phone Survey Welcome Call','1.3'],['Claim Process','5.2'],['Confirmation Of Advice (COA)','1.2']]},
- {g:'Universal Life', items:[['Process of Empanelment of new IBs','7.1'],['Referral Program','7.4'],['Annual on-going Due Diligence & Name screening','7.2']]},
- {g:'Campaign', items:[['Submission & Approval','4.1'],['Tracking','4.4'],['Fulfilment','4.4'],['Campaign Clawback','4.5'],['FD Promo code Creation & Deletion','4.2'],['Marketing Campaign','4.1'],['Product Review','6.3']]}
-];
-
-var CTYPE = {added:'Added', moved:'Moved', merged:'Merged', changed:'Changed in the meeting', dropped:'Dropped'};
-var CH = [
- {type:'added', t:'A Reporting branch', d:'The old SOP’s Section 5 is ours: monthly numbers, forecasts, the MC report and commission posting. Neither chart had a place for it.', go:'br:b8'},
- {type:'added', t:'Selling Steps, under Know Your Customer', d:'Holds your Sales, Sales Process and Application & Submission, pointing to the RWM Sales Supervisory SOP until question 2 is answered.', go:'box:1.4'},
- {type:'added', t:'Campaign Clawback', d:'The clause the meeting kept. It isn’t the incentive holdback, so it gets its own box.', go:'box:4.5'},
- {type:'added', t:'Front pages', d:'Purpose, scope, laws, other SOPs, general rules and the glossary. Every SOP needs them, but a chart for management leaves them out.', go:'br:f'},
- {type:'moved', t:'Confirmation of Advice', d:'From Claims to Advisory & Suitability. It’s the advice record we keep in case of disputes, so it belongs with the advice.', go:'box:1.2'},
- {type:'merged', t:'Campaign', d:'It sat in three places in your draft. Now one branch covers both customer and sales team campaigns.', go:'br:b4'},
- {type:'changed', t:'The campaign steps', d:'From the campaign meeting:', list:['EAR approval points to the EAR SOP','No-cost campaigns go by memo','A roll-out email on launch day, and quick corrections','Tracking from the partners’ reports plus our own tracker','One person prepares the winner list and another checks it, then the segment head and RWM Business Compliance clear it','Customer campaign fulfilment is with Marcom'], go:'br:b4'},
- {type:'dropped', t:'Post-Implementation Review', d:'No one has done one, so the meeting agreed to drop it unless the reviewers ask.', go:'box:4.6'}
-];
-
 var QS = [
- {n:1, q:'Is CT’s chart the final skeleton, or still changing?', why:'Everything here hangs off it. If a box name changes, what goes inside it mostly stays put.', go:[]},
- {n:2, q:'When they say “sales process”, do they mean the selling steps, or our checks around the sale?', why:'The selling steps sit in the RWM Sales Supervisory SOP today, and CT’s chart covers the sale through checks: screening, suitability and the welcome call. If they want the full steps in, the Selling Steps box grows into a full section.', go:[['box:1.4','See the Selling Steps box']]},
- {n:3, q:'Is takaful in the new SOP?', why:'CT’s title says Bancassurance only. The campaign meeting dropped the takaful partner from fulfilment but still checks takaful in tracking, and the Islamic side is doing its own part. The answer decides whether FD-i promo codes, HLMT’s illustrations and the takaful half of most sections come across.', go:[['box:4.2','See Campaign Materials'],['box:6.2','See Maintenance & Change']]},
- {n:4, q:'Which teams’ roles does it cover?', why:'The aim is that a new joiner can find their part. It decides whether RWM-Admin’s steps in reporting and commission posting stay in.', go:[['br:b8','See the Reporting branch']]},
- {n:5, q:'Is it OK to add a Reporting branch?', why:'Monthly numbers, forecasts, the MC report and commission posting are ours in the old SOP, but neither chart has a place for them.', go:[['br:b8','See the Reporting branch']]},
- {n:6, q:'When is your draft due?', why:'The printed timeline has the dates. The team reviews it first, then Compliance, due December.', go:[['tab:next','See next steps']]}
+ {n:1, q:'Which teams’ roles does it cover?', why:'The aim is that a new joiner can find their part. It decides whether RWM-Admin’s steps in 9.1 and 9.2 stay in.', go:[['box:9.1','See 9.1'],['box:9.2','See 9.2']]},
+ {n:2, q:'When is your draft due?', why:'The printed timeline has the dates. The team reviews it first, then Compliance, due December.', go:[['tab:next','See next steps']]}
 ];
 
 var SMALL = [
- {t:'Does the RWM Sales Supervisory SOP really cover the selling steps the new SOP points to?', go:'box:1.4', label:'See Selling Steps'},
- {t:'Holdback bands: exactly 90% in year 1, or 80% in year 2, falls in no band.', go:'box:3.3', label:'See Incentive Clawback'},
- {t:'Delivery times: 4.7 gives couriers 3 to 4 working days, but 4.9.2 says 7 to 14.', go:'box:5.2', label:'See Product Servicing'},
- {t:'What PtoP and TSR stand for, in commission posting.', go:'box:8.2', label:'See Commission Posting'},
- {t:'Who reviews the insurers’ follow-up calls to vulnerable customers?', go:'box:1.2', label:'See Advisory & Suitability'},
- {t:'Who fulfils staff campaigns, now that Marcom does customer ones?', go:'box:4.4', label:'See Tracking & Fulfillment'},
- {t:'Who approves FD-i promo codes, if takaful stays in?', go:'box:4.2', label:'See Campaign Materials'}
+ {t:'High-risk customers: the draft says income below RM2,000, but BNM’s bancassurance policy document gives up to RM5,000 a month. Ask Compliance.', go:'box:2.2', label:'See 2.2'},
+ {t:'Holdback: which row applies when Y1 and Y2 land in different rows?', go:'box:4.3', label:'See 4.3'},
+ {t:'Who fulfils staff campaigns, now that the marketing team does customer ones?', go:'box:5.2.1', label:'See 5.2.1'},
+ {t:'Is the 21-day notice of T&C changes ours or HLA’s?', go:'box:6.1', label:'See 6.1'},
+ {t:'Delivery times: 4.7 gives couriers 3 to 4 working days, but 4.9.2 says 7 to 14. Check with HLA.', go:'box:6.2', label:'See 6.2'},
+ {t:'Who decides how to resolve an unmatched payment?', go:'box:6.2', label:'See 6.2'},
+ {t:'Do UL servicing, claims and complaints go through the Offshore IB?', go:'box:6.3', label:'See 6.3'},
+ {t:'What PtoP stands for, in commission posting.', go:'box:9.2', label:'See 9.2'}
 ];
-var SETTLED = ['Who owns credit products','Who the “HLISB team” is','MRTA or MDTA'];
+var SETTLED = ['Your chart is locked: 9 branches and 34 boxes','Sales Process has the full selling steps','Takaful is out, so this SOP is conventional only','Reporting is in, as branch 9','Who owns credit products','Who the “HLISB team” is','MRTA or MDTA'];
 
 var STEPS = [
- {t:'Agree the skeleton', d:'Now. Your answers to the six questions settle it.', now:true},
+ {t:'Lock the skeleton', d:'Done. Your chart has 9 branches and 34 boxes.'},
  {t:'Mark your parts in the old SOP', d:'Track changes, nothing deleted. The old SOP stays for the other teams.'},
- {t:'Rewrite each box', d:'Reworded and updated, not copied and pasted, with the new pieces added.'},
+ {t:'Write each box', d:'', now:true},
  {t:'Reviews, then Compliance', d:'Due December.'}
 ];
 var COLLECT = [
- ['The campaign team’s input','They asked for a table to fill in rather than writing it out.'],
+ ['The campaign team’s check of 5.0','It’s drafted from the meeting, so they only need to correct and add.'],
+ ['The old clawback clause','Saved in the shared folder, for 5.2.2.'],
+ ['How the scorecard, payouts and recognition work','For 3.3, 4.1 and 4.2. The old SOP has nothing on them.'],
+ ['How a broker is off-boarded','For 8.1.3.'],
+ ['UL’s regulatory requirements','For 8.2.'],
  ['The audit points','The ones the SOP has to keep covering.'],
- ['The policy updates',''],
- ['The updated welcome call process',''],
- ['UL’s regulatory requirements',''],
- ['How the scorecard, payouts and recognition work','The old SOP has nothing on them.'],
- ['How a broker is off-boarded',''],
+ ['The policy updates','Including BNM’s draft on proper advice from 30 September, which would change the CFF choices in 2.2.'],
  ['What the incentive definition point was about','The recording wasn’t clear on it.'],
  ['The dates on the printed timeline','']
 ];
-var DRAFT = [
- ['A checklist for the track changes','Which old sections are yours: Keep, Update and the kept part of Trim from the review, minus anything credit-related or PFS.'],
- ['The campaign table','Filled in from the meeting, so the campaign team only corrects and adds.'],
- ['Each box as a section','Stage, details and responsibility, like the old SOP’s tables.'],
+var TODO = [
+ ['Paste in the drafted sections','4.3, 5.0, 6.0, the rest of 7.2, 8.1 and 9.0, from the draft sections file.'],
+ ['Fix the points from the review','The laws list, 2.3 step 3, Single Premium payments and the rest of the notes on your first draft.'],
  ['A one-page table of who does what','So a new joiner can find their part.'],
- ['The front pages','With the laws list refreshed and the PIDM wording checked against the current version.'],
- ['The appendices','Old pages 94 to 98 never came. Boxes that stay refer to the UL consent form, the PRAC flowchart and the ML/TF checklist.'],
- ['The glossary','Last.']
+ ['The appendices','Decide which ones this SOP keeps, renumber them, and fix the references to Appendix 3, 8 and 10.'],
+ ['The glossary','Last, once the wording settles.']
 ];
 var REVIEWS = [
  {t:'Your teammate’s check', d:'The one you asked to look for gaps.'},
@@ -570,12 +553,10 @@ var REVIEWS = [
 
 var FILTERS = [
  ['all','All',''],
- ['old','From the old SOP','old'],
- ['new','New','new'],
+ ['todo','Not in your draft yet','added'],
  ['input','Needs input','input'],
- ['added','Added','added'],
- ['changed','Changed in the meeting','changed'],
- ['drop','Dropped','drop']
+ ['old','From the old SOP','old'],
+ ['new','New','new']
 ];
 
 /* helpers */
@@ -588,17 +569,17 @@ var CHEV = '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentCol
 var PAGE = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><path d="M4 4.5h8M4 8h8M4 11.5h5"/></svg>';
 var TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
 
-/* index the boxes and place her draft */
-var BOX = {}, boxCount = 0;
-BR.forEach(function(b){ b.boxes.forEach(function(x){ x.br = b; x.mine = []; BOX[x.id] = x; if (b.id !== 'f') boxCount++; }); });
-var herTotal = 0, herPlaced = 0;
-HER.forEach(function(g){ g.items.forEach(function(it){ herTotal++; var x = BOX[it[1]]; if (x){ x.mine.push(it[0]); herPlaced++; } }); });
+/* index the boxes and count where they stand */
+var BOX = {}, boxCount = 0, inDraft = 0, drafted = 0;
+function isTodo(x){ return !(x.st === 'w' || x.st === 'wd'); }
+BR.forEach(function(b){ b.boxes.forEach(function(x){ x.br = b; BOX[x.id] = x; boxCount++; if (!isTodo(x)) inDraft++; else if (x.st === 'd') drafted++; }); });
 
 function matches(x, f){
   if (f === 'old') return x.src === 'old';
   if (f === 'new') return x.src === 'new';
   if (f === 'drop') return x.src === 'drop';
   if (f === 'input') return !!x.input;
+  if (f === 'todo') return isTodo(x);
   if (f === 'added') return !!x.added;
   if (f === 'changed') return !!x.changed;
   return true;
@@ -608,17 +589,14 @@ function matches(x, f){
 function tagsList(x){
   var tags = ['<span class="tag t-' + x.src + '">' + SRC[x.src] + '</span>'];
   if (x.input) tags.push('<span class="tag t-input">Needs input</span>');
-  if (x.changed) tags.push('<span class="tag t-changed">Changed in the meeting</span>');
-  if (x.added) tags.push('<span class="tag t-added">Added</span>');
+  if (ST[x.st]) tags.push('<span class="tag ' + (isTodo(x) ? 't-file' : 't-in') + '">' + ST[x.st] + '</span>');
   (x.q || []).forEach(function(n){ tags.push('<span class="tag t-q">Question ' + n + '</span>'); });
   return tags;
 }
 function detHTML(x){
   var det = '';
   if (x.src !== 'drop'){
-    det += '<section><h4>From your draft</h4>' + (x.mine.length
-      ? '<ul class="mine">' + x.mine.map(function(m){ return '<li>' + esc(m) + '</li>'; }).join('') + '</ul>'
-      : '<p class="none">Nothing in your draft yet.</p>') + '</section>';
+    det += '<section><h4>Where it stands</h4><p class="stl">' + esc(STL[x.st] || '') + '</p></section>';
     det += '<section><h4>In the old SOP</h4>' + ((x.old && x.old.length)
       ? '<ul class="secs">' + x.old.map(function(o){ return '<li><b>' + esc(o[0]) + '</b><span>' + esc(o[1]) + '</span></li>'; }).join('') + '</ul>'
       : '<p class="none">Nothing yet, so this one is written fresh.</p>') + '</section>';
@@ -629,13 +607,13 @@ function detHTML(x){
 }
 function boxHTML(x){
   var cls = ['bx', x.src];
-  if (x.added) cls.push('added');
+  if (isTodo(x)) cls.push('notyet');
   var tags = tagsList(x);
   var det = detHTML(x);
   return '<li class="' + cls.join(' ') + '" id="box-' + did(x.id) + '" data-id="' + esc(x.id) + '">' +
     '<button class="bx-row" type="button" aria-expanded="false" aria-controls="bxm-' + did(x.id) + '">' +
       '<span class="bx-node" aria-hidden="true"></span>' +
-      '<span class="bx-text"><span class="bx-title">' + esc(x.t) + '</span><span class="bx-line">' + esc(x.line) + '</span><span class="tags">' + tags.join('') + '</span></span>' +
+      '<span class="bx-text"><span class="bx-title"><span class="bx-num">' + esc(x.id) + '</span>' + esc(x.t) + '</span><span class="bx-line">' + esc(x.line) + '</span><span class="tags">' + tags.join('') + '</span></span>' +
       CHEV +
     '</button>' +
     '<div class="bx-more" id="bxm-' + did(x.id) + '"><div class="bx-inner"><div class="det">' + det + '</div></div></div>' +
@@ -648,7 +626,7 @@ function brHTML(b, i){
     else if (!x.grp && lastG){ items += '<li class="gap" aria-hidden="true"></li>'; lastG = null; }
     items += boxHTML(x);
   });
-  var pips = b.boxes.map(function(x){ return '<i class="pip ' + x.src + (x.added ? ' add' : '') + '"></i>'; }).join('');
+  var pips = b.boxes.map(function(x){ return '<i class="pip ' + x.src + (isTodo(x) ? ' add' : '') + '"></i>'; }).join('');
   var n = b.boxes.length;
   var sub = b.sub || (n + (n === 1 ? ' box' : ' boxes'));
   return '<li class="br' + (b.added ? ' added' : '') + '" id="br-' + b.id + '" data-id="' + b.id + '" style="--i:' + i + '">' +
@@ -666,32 +644,15 @@ $('#branches').innerHTML = BR.map(brHTML).join('');
 $('#filters').innerHTML = FILTERS.map(function(f){
   return '<button class="chip" type="button" data-f="' + f[0] + '" aria-pressed="' + (f[0] === 'all') + '">' + (f[2] ? '<i class="mk ' + f[2] + '" aria-hidden="true"></i>' : '') + esc(f[1]) + '</button>';
 }).join('');
-var branchCount = BR.length - 1;
+var branchCount = BR.length;
 var infoDefault = branchCount + ' branches and ' + boxCount + ' boxes';
 $('#info').textContent = infoDefault;
-var placedTxt = (herPlaced === herTotal ? 'All ' + herTotal : herPlaced + ' of ' + herTotal) + ' boxes from your draft have a home.';
+var placedTxt = inDraft + ' of ' + boxCount + ' boxes are in your draft, and ' + drafted + ' more are drafted and ready to paste in.';
 $$('.placed').forEach(function(e){ e.textContent = placedTxt; });
 var words = ['No','One','Two','Three','Four','Five','Six','Seven','Eight','Nine'];
-var qTxt = (words[QS.length] || QS.length) + ' questions need your answer first.';
+var qTxt = (words[QS.length] || QS.length) + (QS.length === 1 ? ' question is' : ' questions are') + ' still open.';
 $$('.qlink').forEach(function(e){ e.textContent = qTxt; });
 $('#qbadge').textContent = QS.length;
-
-$('#clist').innerHTML = CH.map(function(c){
-  return '<li class="ci"><span class="ctype ' + c.type + '"><i class="mk ' + c.type + '" aria-hidden="true"></i>' + CTYPE[c.type] + '</span>' +
-    '<h3>' + esc(c.t) + '</h3><p>' + esc(c.d) + '</p>' +
-    (c.list ? '<ul>' + c.list.map(function(i){ return '<li>' + esc(i) + '</li>'; }).join('') + '</ul>' : '') +
-    '<button class="linkbtn go" type="button" data-go="' + c.go + '">Show it in the skeleton</button></li>';
-}).join('');
-
-$('#where-h').textContent = 'Where your ' + herTotal + ' boxes went';
-$('#her').innerHTML = HER.map(function(g){
-  return '<div class="hg"><h3>' + esc(g.g) + '</h3><span>' + g.items.length + (g.items.length === 1 ? ' box' : ' boxes') + '</span></div>' +
-    '<ul class="hl">' + g.items.map(function(it){
-      var x = BOX[it[1]], b = x.br;
-      return '<li><button type="button" data-go="box:' + esc(it[1]) + '"><span class="from">' + esc(it[0]) + '</span>' +
-        '<span class="to"><span class="mini' + (b.added ? ' add' : '') + '" aria-hidden="true">' + (b.num || '') + '</span><span>' + esc(x.t) + '</span></span></button></li>';
-    }).join('') + '</ul>';
-}).join('');
 
 $('#qlist').innerHTML = QS.map(function(q){
   return '<li class="qi" id="q-' + q.n + '"><span class="ring" aria-hidden="true">' + q.n + '</span><div>' +
@@ -712,18 +673,20 @@ function seqHTML(list){
 function todoHTML(list){
   return list.map(function(t){ return '<li><div><b>' + esc(t[0]) + '</b>' + (t[1] ? '<span>' + esc(t[1]) + '</span>' : '') + '</div></li>'; }).join('');
 }
+STEPS[2].d = 'Now. ' + inDraft + ' boxes are in your draft, and ' + drafted + ' more are drafted and ready to paste in.';
 $('#steps').innerHTML = seqHTML(STEPS);
 $('#reviews').innerHTML = seqHTML(REVIEWS);
 $('#collect').innerHTML = todoHTML(COLLECT);
-$('#draft').innerHTML = todoHTML(DRAFT);
+$('#draft').innerHTML = todoHTML(TODO);
 
-/* render: flow chart, laid out like CT's chart */
+/* render: flow chart, laid out like her chart */
 var BR_BY = {};
 BR.forEach(function(b){ BR_BY[b.id] = b; });
 function flowNode(x){
-  var cls = 'fn ' + x.src + (x.added ? ' added' : '') + (x.input ? ' input' : '');
-  var label = x.t + (x.input ? ', needs input' : '') + (x.added ? ', added' : '');
-  return '<li><button type="button" class="' + cls + '" data-box="' + esc(x.id) + '" aria-label="' + esc(label) + '"><span>' + esc(x.t) + '</span></button></li>';
+  var todo = isTodo(x);
+  var cls = 'fn ' + x.src + (todo ? ' notyet' : '') + (x.input ? ' input' : '');
+  var label = x.id + ' ' + x.t + (x.input ? ', needs input' : '') + (todo ? ', not in your draft yet' : '');
+  return '<li><button type="button" class="' + cls + '" data-box="' + esc(x.id) + '" aria-label="' + esc(label) + '"><span class="fn-n">' + esc(x.id) + '</span><span class="fn-t">' + esc(x.t) + '</span></button></li>';
 }
 function flowCol(b){
   var html = '', j = 0;
@@ -748,18 +711,18 @@ $('#frings').innerHTML = BR.map(function(b, i){
 function boxSheet(x){
   var b = x.br;
   return '<p class="sheet-k">' + esc(b.num ? 'Branch ' + b.num + ', ' + b.name : b.name) + '</p>' +
-    '<h3 id="sheet-t">' + esc(x.t) + '</h3>' +
+    '<h3 id="sheet-t">' + esc(x.id + ' ' + x.t) + '</h3>' +
     '<p class="sheet-line">' + esc(x.line) + '</p>' +
     '<div class="tags">' + tagsList(x).join('') + '</div>' +
     '<div class="det">' + detHTML(x) + '</div>' +
     '<button class="linkbtn go" type="button" data-go="box:' + esc(x.id) + '">Open it in the Skeleton tab</button>';
 }
 function branchSheet(b){
-  return '<p class="sheet-k">' + esc(b.num ? 'Branch ' + b.num : 'Added, not on CT’s chart') + '</p>' +
+  return '<p class="sheet-k">' + esc('Branch ' + b.num) + '</p>' +
     '<h3 id="sheet-t">' + esc(b.name) + '</h3>' +
     '<p class="sheet-line">' + esc(b.line) + '</p>' +
     '<ul class="sl">' + b.boxes.map(function(x){
-      return '<li><button type="button" class="' + x.src + '" data-sbox="' + esc(x.id) + '"><i class="d" aria-hidden="true"></i><span>' + esc(x.t) + '</span></button></li>';
+      return '<li><button type="button" class="' + x.src + '" data-sbox="' + esc(x.id) + '"><i class="d" aria-hidden="true"></i><span>' + esc(x.id + ' ' + x.t) + '</span></button></li>';
     }).join('') + '</ul>' +
     '<button class="linkbtn go" type="button" data-go="br:' + b.id + '">Open it in the Skeleton tab</button>';
 }
@@ -894,7 +857,7 @@ function setFilter(f){
 }
 
 /* tabs */
-var TABS = ['flow', 'skeleton', 'changes', 'questions', 'next'];
+var TABS = ['flow', 'skeleton', 'questions', 'next'];
 var ind = $('.tab-ind');
 function moveInd(instant){
   var b = $('.tabs [aria-selected="true"]');
