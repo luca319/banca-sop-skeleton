@@ -347,7 +347,7 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
         <div class="cols" id="cols"></div>
       </div>
     </div>
-    <p class="note">A dashed outline means the box isn’t in your draft yet. Box names and numbers follow your chart.</p>
+    <p class="note">A dashed outline means the box isn’t in your draft yet. Box names and numbers follow your chart, apart from branch 4, renamed after the review with your boss.</p>
   </section>
 
   <section class="panel" id="p-skeleton" role="tabpanel" aria-labelledby="t-skeleton" hidden>
@@ -373,7 +373,7 @@ p,.lead,.bx-line,.br-line,.notes li,.todo span,.seq p{text-wrap:pretty}
     </div>
 
     <p class="note">Credit-related, PFS, general insurance and takaful parts stay in the old SOP for the other teams. This SOP is conventional only.</p>
-    <p class="foot">Updated 8 November 2026. Box names and numbers follow your chart. A dashed outline means the box isn’t in your draft yet.</p>
+    <p class="foot">Updated 10 November 2026. Box names and numbers follow your chart, apart from branch 4. A dashed outline means the box isn’t in your draft yet.</p>
   </section>
 
 
@@ -424,7 +424,7 @@ var ST = {w:'In your draft', wd:'In your draft', d:'In the draft sections file',
 var STL = {
  w:'In your draft.',
  wd:'In your draft. The rest is in the draft sections file, ready to paste in.',
- d:'Drafted in the draft sections file, ready to paste in.',
+ d:'Drafted in the draft sections file, ready to paste in. Version 3 is the latest.',
  c:'Not written yet. It needs the old clawback clause from the shared folder.',
  r:'Not written. Only needed if the reviewers ask for one.',
  i:'Not written yet. It needs input from colleagues.'
@@ -450,28 +450,28 @@ var BR = [
    {id:'2.4', t:'Post-Sales Verification (Welcome Call)', src:'old', st:'w', line:'HLA’s welcome call, the feedback categories, and following up negative feedback.', old:[['4.10.1','Welcome call']], notes:['Your 2.4 b) (post-sales servicing) moves to 6.2.']}
   ]},
  {id:'b3', num:3, name:'Distribution Team: Sales Qualification & Balanced Scorecard',
-  line:'Who can sell, and how they’re measured.',
+  line:'Who can sell, and how HLA scores the Bank.',
   boxes:[
    {id:'3.1', t:'Licensing & Qualifications', src:'old', st:'w', line:'Licences by role, and the CPD and RFP requirements.', old:[['2.2.8','Staff licensing'],['2.10.3','Corporate agency rules']], notes:['The corporate agent rules from old 2.10.3 aren’t in yet.']},
    {id:'3.2', t:'Training Requirements', src:'old', st:'w', line:'Yearly CPD training with HLA and L&D, and e-RFP enrolment.', old:[['2.2.8','CPD and RFP training'],['2.2.3 (8)','Briefing to frontliners']], notes:['Forwarding HLA’s monthly agent list to L&D isn’t in yet.']},
-   {id:'3.3', t:'Balanced Scorecard (BSC)', src:'new', input:true, st:'i', line:'How sales staff are scored.', notes:['Nothing in the old SOP. Needs input on how the scorecard works.']}
+   {id:'3.3', t:'Balanced Scorecard (BSC)', src:'new', input:true, st:'d', line:'How HLA scores the Bank under the distribution agreement, which affects our commission.', notes:['Rewritten in version 3 after the review with your boss: the scorecard is HLA’s assessment of the Bank. Frontline staff aren’t assessed on one today.','The measures and the year-end steps come from the DA and HLA’s current scorecard.']}
   ]},
- {id:'b4', num:4, name:'Incentive & Rewards Management',
-  line:'Recognition, payouts and the holdback.',
+ {id:'b4', num:4, name:'Commission Management',
+  line:'The commission HLA pays the Bank, persistency, and the credit to the frontline.',
   boxes:[
-   {id:'4.1', t:'Recognition Programs', src:'new', input:true, st:'i', line:'How top sales staff are recognised.', notes:['Nothing in the old SOP. Needs input on how the programs run.']},
-   {id:'4.2', t:'Incentive Payouts & Rewards', src:'new', input:true, st:'i', line:'How and when incentives are paid.', notes:['Nothing in the old SOP. Needs input on how payouts work.','A definition of incentive may belong here. It came up in the second meeting, but the recording wasn’t clear.']},
-   {id:'4.3', t:'Incentive Clawback Mechanism', src:'old', st:'d', line:'Persistency reports, and the yearly incentive holdback when first or second year persistency falls short.', old:[['5.1 (6)','Persistency report and holdback table']], notes:['The draft fixes the gap where exactly 90% or 80% fell in no band.','Still to confirm: which row applies when Y1 and Y2 land in different rows.','Not the same as the campaign clawback in 5.2.2.']}
+   {id:'4.1', t:'Commission Structure & Rates', src:'new', input:true, st:'d', line:'The commission rate for each product, as set in the distribution agreement, and how rates change.', notes:['New in version 3, after the review with your boss. The rates come from the DA.','HLA applies BNM’s commission limits for each product under the operating cost controls policy document.']},
+   {id:'4.2', t:'Persistency & Commission Review', src:'old', input:true, st:'d', line:'HLA’s monthly persistency rates, the quarterly report and follow-ups, and the year-end review that sets the commission rate.', old:[['5.1 (6)','Persistency report']], notes:['Updated in version 3. The holdback table is gone, since staff incentives belong to the incentive team.','Genuine lapses under BNM’s October FAQ: waiting for HLA’s reply in writing.']},
+   {id:'4.3', t:'Commission Credit to Frontline', src:'new', input:true, st:'d', line:'How the commission rate is applied to the frontline, as revenue points for branch KRA.', notes:['New in version 3. Your boss wants the method revised, so step 1 waits until it’s agreed.']}
   ]},
  {id:'b5', num:5, name:'Campaign Management (Customer & Sales Team)',
   line:'Our part of a campaign, from the proposal to the rewards.',
   boxes:[
-   {id:'5.1.1', grp:'5.1 Pre-Campaign', t:'EAR Approval', src:'old', input:true, st:'d', line:'We propose, agreed with the segment and distribution channel heads. Costs go through the EAR SOP, and no-cost campaigns go by memo to the same people plus Finance.', old:[['2.2.11 (3)','Marketing campaigns'],['2.9','Campaign setup and approval']], notes:['Reviewers: Risk Management, Compliance, and HR when staff are rewarded, because of tax.','Drafted from the campaign meeting, so the campaign team only needs to confirm it.']},
+   {id:'5.1.1', grp:'5.1 Pre-Campaign', t:'EAR Approval', src:'old', input:true, st:'d', line:'We propose, agreed with the segment and distribution channel heads. Costs go through the EAR SOP, and no-cost campaigns go by memo to the same people plus Finance.', old:[['2.2.11 (3)','Marketing campaigns'],['2.9','Campaign setup and approval']], notes:['Reviewers: Risk Management, Compliance, and HR when staff are rewarded, because of tax.','Version 3 adds the HR Remuneration Policy for staff rewards. Check the exact title of the expense approval policy.','Your boss wants 5.0 to show how campaigns are run day to day.']},
    {id:'5.1.2', grp:'5.1 Pre-Campaign', t:'Campaign Materials & T&C', src:'old', st:'d', line:'The standard T&C, the campaign fact sheet, the rules for marketing materials and the PIDM statements, and FD promo codes.', old:[['2.2.7','Marketing and promotional materials'],['2.2.9','FD promo codes'],['4.5.2','Disclosure clause in campaign T&Cs']], notes:['Check the PIDM statements against PIDM’s current wording.']},
    {id:'5.1.3', grp:'5.1 Pre-Campaign', t:'Campaign Communication', src:'old', st:'d', line:'The launch email to frontliners with the fact sheet, and quick corrections by email.', old:[['2.2.11 (3)','Telling sales staff before launch'],['2.2.11 (1, 2, 4)','Press, ads and website']], notes:['Press releases, ads and website updates point to the marketing SOPs.']},
    {id:'5.2.1', grp:'5.2 Post-Campaign', t:'Tracking & Fulfillment', src:'old', input:true, st:'d', line:'Tracking from HLA’s reports. A maker and a checker check the winners list, the segment head and RWM Compliance clear it, then the gifts go out.', old:[['2.9','Campaign fulfilment']], notes:['Still to confirm: who fulfils staff campaigns, now that the marketing team does customer ones.']},
-   {id:'5.2.2', grp:'5.2 Post-Campaign', t:'Campaign Clawback', src:'old', st:'c', line:'The campaign clawback clause, kept from the old version as agreed.', old:[['Shared folder','The existing clawback clause']], notes:['Not the same as the incentive holdback in 4.3.']},
-   {id:'5.2.3', grp:'5.2 Post-Campaign', t:'Post-Implementation Review (PIR)', src:'new', st:'r', line:'On the chart, but written only if the reviewers ask for one.', notes:['No one has done one for a campaign so far. Agreed in the campaign meeting.']}
+   {id:'5.2.2', grp:'5.2 Post-Campaign', t:'Campaign Clawback', src:'old', st:'d', line:'The campaign clawback clause. The draft sections file has a standard clause until the old one is found.', old:[['Shared folder','The existing clawback clause']], notes:['If the old clause in the shared folder says something different, use the old wording.']},
+   {id:'5.2.3', grp:'5.2 Post-Campaign', t:'Post-Implementation Review (PIR)', src:'new', st:'d', line:'A short review one month after each campaign ends.', notes:['Your boss wants it in, so it’s no longer optional (version 3).']}
   ]},
  {id:'b6', num:6, name:'Customer Engagement & Servicing',
   line:'Looking after customers after the sale.',
@@ -490,16 +490,16 @@ var BR = [
  {id:'b8', num:8, name:'Universal Life (UL) & Broker Referral Program',
   line:'The brokers we refer customers to, and how the referral program runs.',
   boxes:[
-   {id:'8.1.1', grp:'8.1 Partnership Management', t:'Onboarding', src:'new', st:'d', line:'Bringing a new broker onto the panel, through PRAC.', notes:['Drafted from the broker onboarding going through PRAC now. Check it’s the standard route.']},
+   {id:'8.1.1', grp:'8.1 Partnership Management', t:'Onboarding', src:'new', st:'d', line:'Bringing a new broker onto the panel, through PRAC.', notes:['Drafted from the broker onboarding going through PRAC now. Check it’s the standard route.','Version 3 adds screening in SIRON with a maker and a checker, and Legal’s review of the HLB Singapore supplemental agreement.']},
    {id:'8.1.2', grp:'8.1 Partnership Management', t:'Maintenance', src:'old', st:'d', line:'Yearly due diligence and name screening on each broker.', old:[['3.10.2','Annual due diligence on UL brokers']]},
-   {id:'8.1.3', grp:'8.1 Partnership Management', t:'Off-boarding', src:'new', input:true, st:'i', line:'Ending a broker relationship.', notes:['Nothing in the old SOP. Needs input on how it’s done.']},
+   {id:'8.1.3', grp:'8.1 Partnership Management', t:'Off-boarding', src:'new', st:'d', line:'Ending a broker relationship.', notes:['Your draft, set out as steps in the draft sections file. Check whether PRAC approves an off-boarding or only notes it.']},
    {id:'8.2', t:'Referral Program Governance', src:'old', input:true, st:'w', line:'Who can be referred, consent, appointments, premium financing and referral income.', old:[['3.10.1','Referral program']], notes:['Still needs UL’s regulatory requirements.','Step 1 says Sophisticated Investors and step 5 says Accredited Investor. Use one term.']}
   ]},
  {id:'b9', num:9, name:'Reporting',
   line:'Monthly numbers, forecasts, the MC report and commission posting.',
   boxes:[
    {id:'9.1', t:'Sales & Management Reporting', src:'old', st:'d', q:[1], line:'Monthly sales and revenue numbers by the 7th, forecasts twice a month, the MC report, and HLA’s weekly Confirmation of Advice.', old:[['5.1 (1 to 3)','Reporting'],['5.1 (4)','Confirmation of Advice']], notes:['RWM-Admin does part of this. Whether their steps stay depends on question 1.','The Confirmation of Advice could sit in 2.2 instead.']},
-   {id:'9.2', t:'Commission Posting', src:'old', st:'d', q:[1], line:'Commission and fees from HLA, posted, approved and checked against what HLA paid, plus UL referral income.', old:[['5.2.1','Commission posting']], notes:['Still to confirm: what PtoP stands for.','RWM-Admin does part of this too.']}
+   {id:'9.2', t:'Commission Posting', src:'old', st:'d', q:[1], line:'Commission and fees from HLA, posted, approved and checked against what HLA paid, plus UL referral income.', old:[['5.2.1','Commission posting']], notes:['Still to confirm: what PtoP stands for.','RWM-Admin does part of this too.','Could move into 4.0, so everything on commission sits together.']}
   ]}
 ];
 
@@ -509,16 +509,18 @@ var QS = [
 ];
 
 var SMALL = [
- {t:'High-risk customers: the draft says income below RM2,000, but BNM’s bancassurance policy document gives up to RM5,000 a month. Ask Compliance.', go:'box:2.2', label:'See 2.2'},
- {t:'Holdback: which row applies when Y1 and Y2 land in different rows?', go:'box:4.3', label:'See 4.3'},
+ {t:'High-risk customers: Part B updates 2.2 to BNM’s bancassurance policy document (income up to RM5,000 a month, first-time buyers, students and retirees). Confirm with Compliance.', go:'box:2.2', label:'See 2.2'},
+ {t:'HLA’s written reply on BNM’s October FAQ: does it change the Bank’s commission or scorecard, and which lapses count as genuine?', go:'box:4.2', label:'See 4.2'},
+ {t:'How should the commission rate be applied to the frontline? Your boss asked why one single premium product is at 10% and not 11%.', go:'box:4.3', label:'See 4.3'},
  {t:'Who fulfils staff campaigns, now that the marketing team does customer ones?', go:'box:5.2.1', label:'See 5.2.1'},
  {t:'Is the 21-day notice of T&C changes ours or HLA’s?', go:'box:6.1', label:'See 6.1'},
  {t:'Delivery times: 4.7 gives couriers 3 to 4 working days, but 4.9.2 says 7 to 14. Check with HLA.', go:'box:6.2', label:'See 6.2'},
  {t:'Who decides how to resolve an unmatched payment?', go:'box:6.2', label:'See 6.2'},
  {t:'Do UL servicing, claims and complaints go through the Offshore IB?', go:'box:6.3', label:'See 6.3'},
+ {t:'When will Legal finish reviewing the HLB Singapore supplemental agreement, so both banks know when referrals can start?', go:'box:8.1.1', label:'See 8.1.1'},
  {t:'What PtoP stands for, in commission posting.', go:'box:9.2', label:'See 9.2'}
 ];
-var SETTLED = ['Your chart is locked: 9 branches and 34 boxes','Sales Process has the full selling steps','Takaful is out, so this SOP is conventional only','Reporting is in, as branch 9','Who owns credit products','Who the “HLISB team” is','MRTA or MDTA'];
+var SETTLED = ['Your chart is locked: 9 branches and 34 boxes','Sales Process has the full selling steps','Takaful is out, so this SOP is conventional only','Reporting is in, as branch 9','Who owns credit products','Who the “HLISB team” is','MRTA or MDTA','Branch 4 is now Commission Management, since staff incentives belong to the incentive team','The Balanced Scorecard is HLA’s assessment of the Bank, not of frontline staff','A review one month after each campaign'];
 
 var STEPS = [
  {t:'Lock the skeleton', d:'Done. Your chart has 9 branches and 34 boxes.'},
@@ -529,20 +531,21 @@ var STEPS = [
 var COLLECT = [
  ['The campaign team’s check of 5.0','It’s drafted from the meeting, so they only need to correct and add.'],
  ['The old clawback clause','Saved in the shared folder, for 5.2.2.'],
- ['How the scorecard, payouts and recognition work','For 3.3, 4.1 and 4.2. The old SOP has nothing on them.'],
- ['How a broker is off-boarded','For 8.1.3.'],
+ ['The commission rates and scorecard measures','From the DA and HLA, for 3.3 and 4.1. Version 3 has the steps.'],
+ ['HLA’s written reply on the October FAQ','For 4.2. Compliance is waiting for it too.'],
+ ['The incentive team’s SOP name','For the pointer in 4.0.'],
+ ['Whether PRAC approves an off-boarding','For 8.1.3. The draft sections file has your draft as steps.'],
  ['UL’s regulatory requirements','For 8.2.'],
  ['The audit points','The ones the SOP has to keep covering.'],
  ['The policy updates','Including BNM’s draft on proper advice from 30 September, which would change the CFF choices in 2.2.'],
- ['What the incentive definition point was about','The recording wasn’t clear on it.'],
  ['The dates on the printed timeline','']
 ];
 var TODO = [
- ['Paste in the drafted sections','4.3, 5.0, 6.0, the rest of 7.2, 8.1 and 9.0, from the draft sections file.'],
- ['Fix the points from the review','The laws list, 2.3 step 3, Single Premium payments and the rest of the notes on your first draft.'],
- ['A one-page table of who does what','So a new joiner can find their part.'],
- ['The appendices','Decide which ones this SOP keeps, renumber them, and fix the references to Appendix 3, 8 and 10.'],
- ['The glossary','Last, once the wording settles.']
+ ['Paste in the changes after the review','3.3 and 4.0 are rewritten, with small edits to 5.1.1, 5.2.3, 8.1.1, 1.6 and 2.3. The changes file has just these.'],
+ ['Fix the sections you’ve written','Part B of version 3 has the text to paste for 1.0 to 3.2, 7.1 and 8.2, with a reason for each.'],
+ ['Check who does what with the team','The table is in Part C of version 3.'],
+ ['The appendices','Part C of version 3 suggests new numbers and which ones to add.'],
+ ['The glossary','Last, once the wording settles. Part C of version 3 lists the short forms to add.']
 ];
 var REVIEWS = [
  {t:'Your teammate’s check', d:'The one you asked to look for gaps.'},
